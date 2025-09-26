@@ -1,0 +1,13 @@
+
+{% extends "base.html" %}
+{% block title %}Please wait…{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h2 class="platform-title">{{ platform }}</h2>
+  <div class="info-card">
+    <p>Option 1 selected — please smile. The page will continue automatically.</p>
+    <p><small>If nothing happens, click <a href="{{ next_url }}">continue</a>.</small></p>
+  </div>
+  <meta http-equiv="refresh" content="{{ delay_ms // 1000 }};url={{ next_url }}">
+</main>
+{% endblock %}

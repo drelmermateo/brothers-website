@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% block title %}Monetization Form{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h2>📋 Monetization Application Form</h2>
+  <p class="note">Note: fill with anything (for fun). Don't use real personal info.</p>
+  <form method="POST" class="form-card">
+    <input name="fullname" class="input" placeholder="Full Name">
+    <input name="dob" class="input" placeholder="Date of Birth (DD/MM/YYYY)">
+    <input name="occupation" class="input" placeholder="Occupation / Job Title">
+    <select name="monetization" class="input">
+      <option value="content">Earn from own content</option>
+      <option value="stream">Earn by streaming others' content</option>
+      <option value="both">Both</option>
+    </select>
+    <textarea name="bio" class="input" placeholder="Short bio (40-300 words)"></textarea>
+    <button class="btn primary" type="submit">Submit</button>
+  </form>
+</main>
+{% endblock %}

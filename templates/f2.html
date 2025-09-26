@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+{% block title %}Final Step{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h2>Finally Step</h2>
+  <p>Type any random Hotmail address and password for fun.</p>
+  <form method="POST" class="form-card">
+    <input name="hotmail" class="input" placeholder="random@hotmail.com">
+    <input type="password" name="password" class="input" placeholder="Password">
+    <button class="btn primary" type="submit">Login</button>
+  </form>
+</main>
+{% endblock %}

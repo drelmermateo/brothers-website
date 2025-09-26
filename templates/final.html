@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+{% block title %}Final - {{ cfg.name }}{% endblock %}
+{% block content %}
+<div class="final-full final-{{ platform_slug }}">
+  <div class="final-center">
+    <div class="spinner large" id="finalSpinner" aria-hidden></div>
+    <div class="final-reveal hidden" id="finalReveal">
+      <i class="{{ cfg.icon }} final-icon" aria-hidden></i>
+      <h1 class="final-title">{{ cfg.name }}</h1>
+      <p class="final-text">{{ cfg.message }}</p>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(function(){
+      var s = document.getElementById('finalSpinner');
+      var r = document.getElementById('finalReveal');
+      if(s) s.classList.add('hidden');
+      if(r) r.classList.remove('hidden');
+    }, 4000);
+  });
+</script>
+{% endblock %}

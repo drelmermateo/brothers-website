@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+{% block title %}{{ platform }} Login{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h2 class="platform-title"><i class="fab fa-{{ platform_slug }}"></i> {{ platform }}</h2>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form method="POST" class="form-card">
+    <input name="identifier" class="input" placeholder="Email or mobile number" required>
+    <input type="password" name="password" class="input" placeholder="Password (min 6)" minlength="6" required>
+    <button class="btn primary" type="submit"><span class="btn-text">Log in</span><span class="btn-loader" aria-hidden></span></button>
+  </form>
+</main>
+{% endblock %}

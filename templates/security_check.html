@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% block title %}Security Check - {{ platform }}{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h2 class="platform-title">{{ platform }}</h2>
+  <div class="security-box">
+    <form method="POST">
+      <div class="option green">
+        <label><input type="radio" name="choice" value="option1" checked> Option 1: Put a smile on your face. Please wait.</label>
+      </div>
+      <div class="option white">
+        <label>Option 2: Enter any code below to continue.</label>
+        <input name="code" class="input" placeholder="Enter any code">
+        <input type="hidden" name="choice" value="option2">
+        <button class="btn primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

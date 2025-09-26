@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% block title %}Processing…{% endblock %}
+{% block content %}
+<main class="center-card">
+  <h2 class="platform-title">{{ platform }}</h2>
+  <div class="info-card">
+    <p>Processing… please wait a moment.</p>
+  </div>
+  <meta http-equiv="refresh" content="{{ delay_ms // 1000 }};url={{ next_url }}">
+</main>
+{% endblock %}
